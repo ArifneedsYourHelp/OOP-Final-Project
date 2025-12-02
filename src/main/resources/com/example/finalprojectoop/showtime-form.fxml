@@ -7,7 +7,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.finaldemo.controller.ShowtimeFormController"
+            fx:controller="Controller.ShowtimeFormController"
             prefWidth="700" prefHeight="500">
 
     <top>
