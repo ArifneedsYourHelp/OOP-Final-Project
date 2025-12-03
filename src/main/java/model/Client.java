@@ -70,6 +70,60 @@ public class Client implements User {
             registeredClients.add(client);
         }
     }
+
+    /**
+     * Loads sample clients into the system for testing/demo purposes.
+     * This method clears existing clients and loads predefined sample data.
+     */
+    public static void loadSampleClients() {
+        // Clear existing clients except the default one
+        registeredClients.clear();
+
+        // Register sample clients from SampleDataHelper
+        try {
+            // Alice Martin
+            Client alice = createClientWithoutValidation("Alice Martin", "pass123", "alice@email.com");
+            registeredClients.add(alice);
+
+            // Bob Chen
+            Client bob = createClientWithoutValidation("Bob Chen", "secure456", "bob@email.com");
+            registeredClients.add(bob);
+
+            // Clara Dupont
+            Client clara = createClientWithoutValidation("Clara Dupont", "cinema789", "clara@email.com");
+            registeredClients.add(clara);
+
+            // David Singh
+            Client david = createClientWithoutValidation("David Singh", "ticket321", "david@email.com");
+            registeredClients.add(david);
+
+            // Also add the default test client
+            Client testClient = createClientWithoutValidation("client", "client123", "test@example.com");
+            registeredClients.add(testClient);
+
+            System.out.println("Sample clients loaded: Alice Martin, Bob Chen, Clara Dupont, David Singh, client");
+        } catch (Exception e) {
+            System.err.println("Error loading sample clients: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Creates a client without duplicate validation (for sample data loading).
+     */
+    private static Client createClientWithoutValidation(String username, String password, String email) {
+        Client client = new Client();
+        client.username = username;
+        client.password = password;
+        client.email = email;
+        return client;
+    }
+
+    /**
+     * Private constructor for creating clients without validation (used internally).
+     */
+    private Client() {
+        // Empty constructor for internal use only
+    }
     @Override
     public String getUsername() { return username; }
 
