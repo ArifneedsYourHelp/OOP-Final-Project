@@ -4,21 +4,22 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.TextField?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="306.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.PasswordField?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="306.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
     <children>
         <SplitPane orientation="VERTICAL" prefHeight="449.0" prefWidth="600.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="261.0" prefWidth="398.0">
                     <children>
                         <Label layoutX="180.0" layoutY="55.0" prefHeight="18.0" prefWidth="38.0" text="Login" />
-                        <TextField fx:id="usernameTextField" layoutX="124.0" layoutY="95.0" />
-                        <TextField fx:id="passwordTextField" layoutX="125.0" layoutY="140.0" />
-                        <Button fx:id="loginButton" layoutX="174.0" layoutY="176.0" mnemonicParsing="false" text="Login" />
-                        <Hyperlink fx:id="signUpLink" layoutX="141.0" layoutY="218.0" text="Click here to sign up" />
+                        <TextField fx:id="usernameTextField" layoutX="124.0" layoutY="95.0" promptText="Enter username"/>
+                        <PasswordField fx:id="passwordTextField" layoutX="125.0" layoutY="140.0" promptText="Enter password"/>
+                        <Button fx:id="loginButton" layoutX="174.0" layoutY="176.0" mnemonicParsing="false" onAction="#OnLoginButtonClick" text="Login" />
+                        <Hyperlink fx:id="signUpLink" layoutX="141.0" layoutY="218.0" onAction="#OnSignUpLinkClick" text="Click here to sign up" />
                     </children>
                 </AnchorPane>
             </items>

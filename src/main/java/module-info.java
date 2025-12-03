@@ -5,4 +5,8 @@ module com.example.finalprojectoop {
 
     opens com.example.finalprojectoop to javafx.fxml;
     exports com.example.finalprojectoop;
+    opens Controller to javafx.fxml;
+    exports Controller;
+    opens model to javafx.fxml;
+    exports model;
 }
