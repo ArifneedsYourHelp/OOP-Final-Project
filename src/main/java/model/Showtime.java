@@ -5,11 +5,14 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
 /**
  * Represents a scheduled showing of a {@link Movie} including date, time, room and seating info.
  * Implements {@link Comparable} so showtimes can be ordered chronologically.
  */
 public class Showtime implements Comparable<Showtime> {
+
+
     /** Movie being shown. */
     private Movie movie;
     /** Calendar date of the showing. */
@@ -58,6 +61,7 @@ public class Showtime implements Comparable<Showtime> {
         this.totalCapacity = totalCapacity;
         this.availableSeats = totalCapacity;
     }
+
 
     /**
      * Parses a time string into {@link LocalTime}. Accepts 24h (HH:MM or HH:MM:SS) and 12h (h:mm AM/PM).

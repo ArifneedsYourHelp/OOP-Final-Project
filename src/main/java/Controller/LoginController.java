@@ -14,23 +14,38 @@ import model.Manager;
 import model.Client;
 import java.util.List;
 
+/**
+ * The {@code LoginController} class manages the user login interface and authentication process.
+ * It handles input from the username and password fields, verifies credentials against
+ * {@code Manager} and {@code Client} models, and navigates the user to the appropriate
+ * application view upon successful login.
+ */
 public class LoginController {
 
+    /** The text field where the user enters their username. */
     @FXML
     private TextField usernameTextField;
 
+    /** The password field where the user enters their password securely. */
     @FXML
     private PasswordField passwordTextField;
 
+    /** The button that initiates the login authentication process. */
     @FXML
-    private Button loginButton; // FXML ID: loginButton
+    private Button loginButton;
 
+    /** The hyperlink used to navigate to the user registration (sign-up) view. */
     @FXML
-    private Hyperlink signUpLink; // FXML ID: signUpLink
+    private Hyperlink signUpLink;
 
-    // ... existing model instances ...
+    /** Instance of the application's {@code Manager} model for manager authentication. */
     private Manager manager = new Manager();
 
+    /**
+     * Handles the action when the Login button is clicked.
+     * It retrieves the entered credentials, attempts to authenticate as a Manager first,
+     * then as a Client. Shows an alert for successful login or failure.
+     */
     @FXML
     private void OnLoginButtonClick() {
         String username = usernameTextField.getText();
@@ -56,6 +71,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * Sets up action listeners for the login button and the sign-up hyperlink.
+     */
     @FXML
     private void initialize() {
         // Load sample clients for login
@@ -66,24 +85,39 @@ public class LoginController {
         signUpLink.setOnAction(event -> OnSignUpLinkClick());
     }
 
-    // --- New Action Handler ---
+    /**
+     * Handles the action when the Sign Up hyperlink is clicked.
+     * It uses the {@code ViewSwitcher} to navigate to the user registration view.
+     */
     @FXML
     private void OnSignUpLinkClick() {
         Stage stage = (Stage) signUpLink.getScene().getWindow();
         ViewSwitcher.switchView(stage, ViewSwitcher.SIGNUP_VIEW);
     }
 
+    /**
+     * Navigates the application's view to the client's main movie list view.
+     * Requires the {@code ViewSwitcher.CLIENT_MOVIE_LIST_VIEW} constant to be defined.
+     */
     private void navigateToClientMovieList() {
         Stage stage = (Stage) loginButton.getScene().getWindow();
         ViewSwitcher.switchView(stage, ViewSwitcher.CLIENT_MOVIE_LIST_VIEW);
     }
 
-
+    /**
+     * Navigates the application's view to the manager's main view.
+     * Requires the {@code ViewSwitcher.MANAGER_VIEW} constant to be defined.
+     */
     private void navigateToManagerView() {
         Stage stage = (Stage) loginButton.getScene().getWindow();
         ViewSwitcher.switchView(stage, ViewSwitcher.MANAGER_VIEW);
     }
 
+    /**
+     * Displays an alert box to the user.
+     * @param title The title text of the alert window.
+     * @param message The main content text displayed in the alert.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(title);
