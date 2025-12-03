@@ -10,17 +10,6 @@ public class Client implements User {
 
     private static final List<Client> registeredClients = new ArrayList<>();
 
-    static {
-        try {
-            // Create and register a sample client automatically
-            Client sampleClient = new Client("client", "client123", "test@example.com");
-            registerClient(sampleClient);
-            System.out.println("Sample client 'testuser' pre-registered for testing.");
-        } catch (IllegalArgumentException e) {
-            // This usually won't happen unless the static data is invalid
-            System.err.println("Failed to pre-register sample client: " + e.getMessage());
-        }
-    }
 
     private String username;
     private String password;
@@ -76,35 +65,17 @@ public class Client implements User {
      * This method clears existing clients and loads predefined sample data.
      */
     public static void loadSampleClients() {
-        // Clear existing clients except the default one
         registeredClients.clear();
 
-        // Register sample clients from SampleDataHelper
-        try {
-            // Alice Martin
-            Client alice = createClientWithoutValidation("Alice Martin", "pass123", "alice@email.com");
-            registeredClients.add(alice);
+        registeredClients.add(createClientWithoutValidation("Alice Martin", "pass123", "alice@email.com"));
+        registeredClients.add(createClientWithoutValidation("Bob Chen", "secure456", "bob@email.com"));
+        registeredClients.add(createClientWithoutValidation("Clara Dupont", "cinema789", "clara@email.com"));
+        registeredClients.add(createClientWithoutValidation("David Singh", "ticket321", "david@email.com"));
+        registeredClients.add(createClientWithoutValidation("client", "client123", "test@example.com"));
+    }
 
-            // Bob Chen
-            Client bob = createClientWithoutValidation("Bob Chen", "secure456", "bob@email.com");
-            registeredClients.add(bob);
-
-            // Clara Dupont
-            Client clara = createClientWithoutValidation("Clara Dupont", "cinema789", "clara@email.com");
-            registeredClients.add(clara);
-
-            // David Singh
-            Client david = createClientWithoutValidation("David Singh", "ticket321", "david@email.com");
-            registeredClients.add(david);
-
-            // Also add the default test client
-            Client testClient = createClientWithoutValidation("client", "client123", "test@example.com");
-            registeredClients.add(testClient);
-
-            System.out.println("Sample clients loaded: Alice Martin, Bob Chen, Clara Dupont, David Singh, client");
-        } catch (Exception e) {
-            System.err.println("Error loading sample clients: " + e.getMessage());
-        }
+    public static List<Client> getRegisteredClientsSnapshot() {
+        return new ArrayList<>(registeredClients);
     }
 
     /**

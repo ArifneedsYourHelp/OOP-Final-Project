@@ -77,14 +77,8 @@ public class SampleDataHelper {
         }
 
         // ========== CLIENTS (Users) ==========
-        // Using your existing Client class: Client(String username, String password, String email)
-        // Merging both user tables from Sample_Data.txt
-        List<Client> clients = new ArrayList<>();
-        clients.add(new Client("Alice Martin", "pass123", "alice@email.com"));
-        clients.add(new Client("Bob Chen", "secure456", "bob@email.com"));
-        clients.add(new Client("Clara Dupont", "cinema789", "clara@email.com"));
-        // U004 David Singh has no email in sample, using placeholder
-        clients.add(new Client("David Singh", "ticket321", "david@email.com"));
+        // Reuse the clients already registered in the system (e.g., via login screen)
+        List<Client> clients = Client.getRegisteredClientsSnapshot();
 
         // ========== SHOWTIMES ==========
         // Using your existing Showtime class: Showtime(Movie movie, LocalDate date, String time, String room, int capacity)
