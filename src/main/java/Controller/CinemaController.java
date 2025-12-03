@@ -1,6 +1,7 @@
 package Controller;
 
 import model.Movie;
+import Helper.SampleDataHelper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -72,11 +73,26 @@ public class CinemaController {
     /**
      * Initializes the controller after FXML injection is complete.
      * This method is automatically called by JavaFX after the FXML file has been loaded.
-     * It loads and displays the initial list of movies.
+     * It loads sample data and displays the initial list of movies.
+     *
+     * <p>Demonstrates the use of helper classes for data initialization
+     * and proper MVC separation of concerns.
      */
     @FXML
     public void initialize() {
+        // Load sample data when the app starts
+        SampleDataHelper.Data data = SampleDataHelper.load();
+
+        // Use the loaded movies
+        this.movies = data.getMovies();
+
+        // Display them in the grid
         loadMovies();
+
+        // Note: Additional data is available if needed:
+        // data.getRooms()     -> List<Room>
+        // data.getClients()   -> List<Client>
+        // data.getShowtimes() -> List<Showtime>
     }
 
     /**

@@ -9,4 +9,5 @@ module com.example.finalprojectoop {
     exports Controller;
     opens model to javafx.fxml;
     exports model;
+    exports Helper;
 }
