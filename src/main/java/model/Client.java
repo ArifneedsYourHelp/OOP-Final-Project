@@ -39,6 +39,14 @@ public class Client implements User {
         this.email = email;
     }
 
+    public static void registerClient(Client newClient) {
+        return;
+    }
+
+    public static Client findClientByUsername(String username) {
+        return null;
+    }
+
     // --- Interface Methods (User) ---
 
     /**
