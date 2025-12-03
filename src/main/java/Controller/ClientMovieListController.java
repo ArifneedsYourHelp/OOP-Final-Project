@@ -89,4 +89,4 @@ public class ClientMovieListController {
         alert.showAndWait();
     }
 
-    }
+}
