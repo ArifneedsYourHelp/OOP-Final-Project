@@ -12,11 +12,6 @@ import model.Showtime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * The {@code ViewSwitcher} class provides a static utility for managing and
- * switching between different views (scenes) within the main application window (Stage).
- * This centralizes the logic for loading FXML files and setting them as the new scene.
- */
 
 public class ClientMovieController {
 
