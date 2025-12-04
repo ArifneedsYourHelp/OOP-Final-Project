@@ -1,6 +1,7 @@
 package Controller;
 
 import Helper.ViewSwitcher;
+import Helper.SampleDataHelper;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
@@ -11,6 +12,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
 import model.Manager;
 import model.Client;
+import java.util.List;
 
 /**
  * The {@code LoginController} class manages the user login interface and authentication process.
@@ -75,6 +77,9 @@ public class LoginController {
      */
     @FXML
     private void initialize() {
+        // Load sample clients for login
+        Client.loadSampleClients();
+
         // Set up the button and link actions
         loginButton.setOnAction(event -> OnLoginButtonClick());
         signUpLink.setOnAction(event -> OnSignUpLinkClick());

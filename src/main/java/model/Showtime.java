@@ -30,8 +30,6 @@ public class Showtime implements Comparable<Showtime> {
     private int availableSeats;
     /** Total seating capacity of the room. */
     private int totalCapacity;
-    /** Flag indicating whether all seats have been reserved. */
-    private boolean soldOut;
 
     /**
      * Creates a showtime with a default capacity of 100 seats.
@@ -51,7 +49,6 @@ public class Showtime implements Comparable<Showtime> {
         this.room = room;
         this.totalCapacity = 100;
         this.availableSeats = totalCapacity;
-        this.soldOut = false;
     }
 
     /**
@@ -106,47 +103,10 @@ public class Showtime implements Comparable<Showtime> {
     public String getTime() { return time; }
     /** Updates time string and reparses {@link #localTime}. */
     public void setTime(String time) { this.time = time; this.localTime = parseTime(time); }
-    /** @return parsed local time */
-    public LocalTime getLocalTime() { return localTime; }
     /** @return room label */
     public String getRoom() { return room; }
     /** Sets room label. */
     public void setRoom(String room) { this.room = room; }
-    /** @return remaining seats */
-    public int getAvailableSeats() { return availableSeats; }
-    /** Sets available seats and updates sold-out flag. */
-    public void setAvailableSeats(int availableSeats) { this.availableSeats = availableSeats; this.soldOut = availableSeats <= 0; }
-    /** @return total capacity */
-    public int getTotalCapacity() { return totalCapacity; }
-    /** Sets total capacity. */
-    public void setTotalCapacity(int totalCapacity) { this.totalCapacity = totalCapacity; }
-    /** @return true if sold out */
-    public boolean isSoldOut() { return soldOut; }
-    /** Manually sets soldOut flag. */
-    public void setSoldOut(boolean soldOut) { this.soldOut = soldOut; }
-
-    /**
-     * Attempts to reserve a number of seats.
-     * @param numberOfSeats seats requested (>0)
-     * @return true if reservation succeeded
-     */
-    public boolean reserveSeats(int numberOfSeats) {
-        if (numberOfSeats <= 0) return false;
-        if (availableSeats >= numberOfSeats) { availableSeats -= numberOfSeats; if (availableSeats == 0) soldOut = true; return true; }
-        return false;
-    }
-
-    /**
-     * Cancels a prior reservation, freeing seats.
-     * @param numberOfSeats seats to restore (>0)
-     */
-    public void cancelReservation(int numberOfSeats) {
-        if (numberOfSeats > 0) {
-            availableSeats += numberOfSeats;
-            if (availableSeats > totalCapacity) availableSeats = totalCapacity;
-            if (availableSeats > 0) soldOut = false;
-        }
-    }
 
     /**
      * Compares by date then by parsed local time.
