@@ -61,20 +61,17 @@ public class SignUpController {
         String email = emailSignTextField.getText();
 
         try {
-            // 1. Create a new Client model object (handles basic validation within constructor)
             Client newClient = new Client(username, password, email);
 
-            // 2. Register the client (e.g., save to a database or list)
             Client.registerClient(newClient);
 
-            // 3. Success notification
             showAlert("Sign Up Successful", "You have successfully signed up as a new client: " + newClient.getUsername());
 
-            // 4. Navigate to the next view
+
             navigateToClientMovieList();
 
         } catch (IllegalArgumentException e) {
-            // Handle validation errors (e.g., empty fields, duplicate username)
+
             showAlert("Sign Up Failed", e.getMessage());
         }
     }

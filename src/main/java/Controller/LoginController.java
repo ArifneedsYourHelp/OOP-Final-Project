@@ -53,8 +53,7 @@ public class LoginController {
 
         if (manager.getUsername().equals(username) && manager.verifyPassword(password)) {
             showAlert("Login Successful", "You are logged in as Manager.");
-            // Assuming Manager also goes to the movie list or a manager view
-            // For now, let's navigate to the client list view for demonstration.
+
             navigateToManagerView();
             return;
         }
@@ -63,7 +62,7 @@ public class LoginController {
 
         if (loggedInClient != null && loggedInClient.verifyPassword(password)) {
             showAlert("Login Successful", "You are logged in as Client: " + username);
-            // Navigate to the client's movie list
+
             navigateToClientMovieList();
         }
         else {
@@ -77,10 +76,10 @@ public class LoginController {
      */
     @FXML
     private void initialize() {
-        // Load sample clients for login
+
         Client.loadSampleClients();
 
-        // Set up the button and link actions
+
         loginButton.setOnAction(event -> OnLoginButtonClick());
         signUpLink.setOnAction(event -> OnSignUpLinkClick());
     }

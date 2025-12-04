@@ -47,15 +47,15 @@ public class ClientMovieController {
      * @param showtimes The list of Showtime objects for this movie.
      */
     public void setMovie(Movie movie, List<Showtime> showtimes) { // ADDED METHOD
-        // 1. Display Movie Details
+
         movieNameLabel.setText("Title: " + movie.getTitle());
         movieGenreLabel.setText("Genre: " + movie.getGenre());
         movieDurrationLabel.setText("Duration: " + movie.getDuration());
         movieRatedLabel.setText("Rating: " + movie.getRating());
 
-        // 2. Display Showtimes
+
         if (showtimes != null && !showtimes.isEmpty()) {
-            // Format the showtime data for display in the ListView: "Date at Time in Room X"
+
             List<String> showtimeStrings = showtimes.stream()
                     .map(st -> st.getFormattedDateTime() + " in " + st.getRoom())
                     .collect(Collectors.toList());
@@ -65,8 +65,8 @@ public class ClientMovieController {
             clientShowTimeList.getItems().setAll("No showtimes available for this movie.");
         }
 
-        // Clearing the single 'roomNumberLabel' as it's not applicable here
-        roomNumberLabel.setText(""); // Room number is shown per showtime in the list, so clear the single label
+
+        roomNumberLabel.setText("");
     }
 
     /**

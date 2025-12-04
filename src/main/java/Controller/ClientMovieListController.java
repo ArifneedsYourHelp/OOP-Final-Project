@@ -51,26 +51,23 @@ public class ClientMovieListController {
      */
     @FXML
     public void initialize() {
-        // Create a single instance of a sample movie
-        // Title: The Code Whisperer, Genre: Tech-Thriller, Duration: 01:45:00, Rating: PG-13
+
         sampleMovie = new Movie("The Code Whisperer", "Tech-Thriller", "01:45:00", "PG-13");
 
-        // Add the sample movie to the list view
+
         clientMovieList.getItems().add(sampleMovie);
 
-        // --- NOTE: This assumes model.Showtime has the static list and constructor changes from the last step ---
-        // Create sample showtimes for this movie. These are saved globally inside model.Showtime.
+
         new Showtime(sampleMovie, java.time.LocalDate.now().plusDays(1), "5:00 PM", "Room 2");
         new Showtime(sampleMovie, java.time.LocalDate.now().plusDays(2), "8:30 PM", "Room 4");
 
-        // --- MOVIE 2: The Martian Gardener ---
-        // Title: The Martian Gardener, Genre: Sci-Fi/Drama, Duration: 02:10:00, Rating: PG
+
         Movie movie2 = new Movie("The Champlains Brains", "Sci-Fi/Drama", "02:10:00", "PG");
 
-        // Add the second sample movie to the list view
+
         clientMovieList.getItems().add(movie2);
 
-        // Create sample showtimes for Movie 2.
+
         new Showtime(movie2, java.time.LocalDate.now().plusDays(1), "7:30 PM", "Room 1");
         new Showtime(movie2, java.time.LocalDate.now().plusDays(3), "4:00 PM", "Room 3");
     }
@@ -85,11 +82,11 @@ public class ClientMovieListController {
 
         if (selectedMovie != null) {
             try {
-                // 1. Load the Detail FXML
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(DETAIL_VIEW_FXML));
                 Parent root = loader.load();
 
-                // 2. Get the controller and pass the selected Movie (and its showtimes)
+
                 ClientMovieController controller = loader.getController();
 
                 /**
@@ -100,10 +97,10 @@ public class ClientMovieListController {
                         .filter(st -> st.getMovie().equals(selectedMovie))
                         .collect(Collectors.toList());
 
-                // Pass the movie and the filtered showtimes to the detail view
-                controller.setMovie(selectedMovie, movieShowtimes); // CRITICAL STEP: Passing the data
 
-                // 3. Switch the scene
+                controller.setMovie(selectedMovie, movieShowtimes);
+
+
                 Stage stage = (Stage) ClientMovieViewButton.getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.show();
