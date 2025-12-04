@@ -66,6 +66,11 @@ public class CinemaController {
     private List<Movie> movies = new ArrayList<>();
 
     /**
+     * The list of all showtimes for movies in the cinema system.
+     */
+    private List<model.Showtime> showtimes = new ArrayList<>();
+
+    /**
      * The currently selected movie for operations like delete or view details.
      */
     private Movie selectedMovie;
@@ -86,12 +91,14 @@ public class CinemaController {
         // Use the loaded movies
         this.movies = data.getMovies();
 
+        // Use the loaded showtimes
+        this.showtimes = data.getShowtimes();
+
         // Display them in the grid
         loadMovies();
 
         // Note: Additional data is available if needed:
         // data.getRooms()     -> List<Room>
-        // data.getClients()   -> List<Client>
         // data.getShowtimes() -> List<Showtime>
     }
 
@@ -229,7 +236,30 @@ public class CinemaController {
             Scene scene = new Scene(loader.load());
 
             ShowtimeFormController controller = loader.getController();
-            controller.setMovie(movie);
+
+            // Find the first showtime for this movie (if any)
+            model.Showtime movieShowtime = null;
+            for (model.Showtime st : showtimes) {
+                if (st.getMovie().equals(movie)) {
+                    movieShowtime = st;
+                    break;
+                }
+            }
+
+            // Set up callback to save new showtimes
+            java.util.function.Consumer<model.Showtime> onSave = st -> {
+                showtimes.add(st);
+            };
+            controller.setOnSave(onSave);
+
+            // Set up callback to handle deleted showtimes
+            java.util.function.Consumer<model.Showtime> onDelete = st -> {
+                showtimes.remove(st);
+            };
+            controller.setOnDelete(onDelete);
+
+            // Set the movie, pre-select showtime if found, and pass all showtimes
+            controller.setMovieAndShowtime(movie, movieShowtime, showtimes);
 
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);

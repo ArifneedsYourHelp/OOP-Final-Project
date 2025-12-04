@@ -22,19 +22,16 @@ public class SampleDataHelper {
     public static class Data {
         private final List<Room> rooms;
         private final List<Movie> movies;
-        private final List<Client> clients;
         private final List<Showtime> showtimes;
 
-        public Data(List<Room> rooms, List<Movie> movies, List<Client> clients, List<Showtime> showtimes) {
+        public Data(List<Room> rooms, List<Movie> movies, List<Showtime> showtimes) {
             this.rooms = rooms;
             this.movies = movies;
-            this.clients = clients;
             this.showtimes = showtimes;
         }
 
         public List<Room> getRooms() { return rooms; }
         public List<Movie> getMovies() { return movies; }
-        public List<Client> getClients() { return clients; }
         public List<Showtime> getShowtimes() { return showtimes; }
     }
 
@@ -47,11 +44,11 @@ public class SampleDataHelper {
     public static Data load() {
         // ========== ROOMS ==========
         List<Room> rooms = new ArrayList<>();
-        rooms.add(new Room("R101", "IMAX Hall", 200));
-        rooms.add(new Room("R102", "Classic", 120));
-        rooms.add(new Room("R103", "VIP Lounge", 50));
-        rooms.add(new Room("R104", "Standard", 150));
-        rooms.add(new Room("R105", "3D Experience", 120));
+        rooms.add(new Room("R101", "Room 1", 200));
+        rooms.add(new Room("R102", "Room 2", 120));
+        rooms.add(new Room("R103", "Room 3", 50));
+        rooms.add(new Room("R104", "Room 4", 150));
+        rooms.add(new Room("R105", "Room 5", 120));
 
         // Map for quick lookup by roomId
         Map<String, Room> roomMap = new HashMap<>();
@@ -89,8 +86,8 @@ public class SampleDataHelper {
         showtimes.add(new Showtime(
                 movieMap.get("M001"),
                 LocalDate.of(2025, 12, 1),
-                "19:00",
-                "R101 - IMAX Hall",
+                "8:30 PM",
+                "R101 - Room 1",
                 roomMap.get("R101").getCapacity()
         ));
 
@@ -98,8 +95,8 @@ public class SampleDataHelper {
         showtimes.add(new Showtime(
                 movieMap.get("M002"),
                 LocalDate.of(2025, 12, 2),
-                "14:00",
-                "R102 - Classic",
+                "2:00 PM",
+                "R102 - Room 2",
                 roomMap.get("R102").getCapacity()
         ));
 
@@ -107,8 +104,8 @@ public class SampleDataHelper {
         showtimes.add(new Showtime(
                 movieMap.get("M003"),
                 LocalDate.of(2025, 12, 3),
-                "21:00",
-                "R103 - VIP Lounge",
+                "11:30 PM",
+                "R103 - Room 3",
                 roomMap.get("R103").getCapacity()
         ));
 
@@ -116,14 +113,10 @@ public class SampleDataHelper {
         showtimes.add(new Showtime(
                 movieMap.get("M004"),
                 LocalDate.of(2025, 12, 4),
-                "16:30",
-                "R104 - Standard",
+                "5:00 PM",
+                "R104 - Room 4",
                 roomMap.get("R104").getCapacity()
         ));
-
-        // s005: No M005 in movies list, skip or add placeholder
-        // (Your sample only has 4 movies but 5 shows)
-
-        return new Data(rooms, movies, clients, showtimes);
+        return new Data(rooms, movies, showtimes);
     }
 }

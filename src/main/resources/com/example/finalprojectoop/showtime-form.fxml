@@ -1,78 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.ShowtimeFormController"
-            prefWidth="700" prefHeight="500">
+<BorderPane prefHeight="500" prefWidth="700" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShowtimeFormController">
 
     <top>
         <HBox spacing="20" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Label text="About" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
-            <Label text="Showtime" style="-fx-font-size: 14px;"/>
+            <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="About" />
+            <Label style="-fx-font-size: 14px;" text="Showtime" />
         </HBox>
     </top>
 
     <left>
         <VBox spacing="15" style="-fx-padding: 20;">
-            <Rectangle arcWidth="10" arcHeight="10" width="250" height="300" style="-fx-fill: #e0e0e0; -fx-stroke: black;"/>
+            <Rectangle arcHeight="10" arcWidth="10" height="300" style="-fx-fill: #e0e0e0; -fx-stroke: black;" width="250" />
 
-            <Label fx:id="titleLabel" text="Title:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="titleLabel" style="-fx-font-weight: bold;" text="Title:" />
 
-            <Label fx:id="genreLabel" text="Genre:"/>
+            <Label fx:id="genreLabel" text="Genre:" />
 
-            <Label fx:id="durationLabel" text="Duration:"/>
+            <Label fx:id="durationLabel" text="Duration:" />
 
-            <Label fx:id="ratingLabel" text="Rating:"/>
-
-            <GridPane hgap="5" vgap="5">
-                <Button text="11:30 A.M" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="80"/>
-                <Button text="2:00 PM" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="80"/>
-                <Button text="5:00 PM" GridPane.columnIndex="2" GridPane.rowIndex="0" prefWidth="80"/>
-                <Button text="8:30 PM" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="80"/>
-                <Button text="8:30 PM" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="80"/>
-                <Button text="11:30 PM" GridPane.columnIndex="2" GridPane.rowIndex="1" prefWidth="80"/>
-            </GridPane>
+            <Label fx:id="ratingLabel" text="Rating:" />
 
             <HBox spacing="10">
-                <Button fx:id="deleteButton" text="Delete" onAction="#handleDelete" style="-fx-background-color: #dc3545; -fx-text-fill: white;"/>
-                <Button fx:id="editButton" text="Edit" onAction="#handleEdit" style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
+                <Button fx:id="deleteButton" onAction="#handleDelete" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Delete" />
+                <Button fx:id="editButton" onAction="#handleEdit" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Edit" />
             </HBox>
         </VBox>
     </left>
 
     <center>
         <VBox spacing="20" style="-fx-padding: 20;">
-            <Label text="Showtime" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Showtime" />
 
-            <HBox spacing="40" alignment="CENTER">
-                <VBox spacing="10" alignment="CENTER">
-                    <Label text="Show Time" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-                    <Label text="Due date"/>
-                    <DatePicker fx:id="datePicker" promptText="DatePicker"/>
-                    <Label text="Time"/>
-                    <ComboBox fx:id="timeComboBox" promptText="Select time" prefWidth="150"/>
+                  <HBox alignment="CENTER" spacing="40">
+                <VBox alignment="CENTER" spacing="10">
+                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Show Time" />
+                    <Label text="Due date" />
+                    <DatePicker fx:id="datePicker" promptText="DatePicker" />
+                    <Label text="Time" />
+                    <ComboBox fx:id="timeComboBox" editable="true" prefWidth="150" promptText="Select or type time" />
                 </VBox>
 
-                <VBox spacing="10" alignment="CENTER_LEFT">
-                    <Label text="Room Number" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-                    <CheckBox fx:id="room1" text="Room 1"/>
-                    <CheckBox fx:id="room2" text="Room 2"/>
-                    <CheckBox fx:id="room3" text="Room 3"/>
-                    <CheckBox fx:id="room4" text="Room 4"/>
-                    <CheckBox fx:id="room5" text="Room 5"/>
+                      <VBox alignment="CENTER_LEFT" spacing="10">
+                    <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Room Number" />
+                    <CheckBox fx:id="room1" text="Room 1" />
+                    <CheckBox fx:id="room2" text="Room 2" />
+                    <CheckBox fx:id="room3" text="Room 3" />
+                    <CheckBox fx:id="room4" text="Room 4" />
+                    <CheckBox fx:id="room5" text="Room 5" />
                 </VBox>
             </HBox>
 
-            <Region VBox.vgrow="ALWAYS"/>
+                  <Separator />
 
-            <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button fx:id="saveButton" text="Save" onAction="#handleSave" style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
-                <Button fx:id="cancelButton" text="Cancel" onAction="#handleCancel"/>
+                  <VBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Saved Showtimes" />
+                <ListView fx:id="showtimeListView" prefHeight="150" style="-fx-border-color: #ccc; -fx-border-width: 1;" />
+            </VBox>
+
+                  <Region VBox.vgrow="ALWAYS" />
+
+                  <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button fx:id="saveButton" onAction="#handleSave" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Save" />
+                <Button fx:id="cancelButton" onAction="#handleCancel" text="Cancel" />
             </HBox>
         </VBox>
     </center>
