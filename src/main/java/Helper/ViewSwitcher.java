@@ -11,6 +11,7 @@ public class ViewSwitcher {
     public static final String SIGNUP_VIEW = "/com/example/finalprojectoop/ClientSignUp-view.fxml";
     public static final String CLIENT_MOVIE_LIST_VIEW = "/com/example/finalprojectoop/ClientMovieList-view.fxml";
     public static final String MANAGER_VIEW =  "/com/example/finalprojectoop/cinema-view.fxml";
+    public static final String DETAIL_VIEW_FXML = "/com/example/finalprojectoop/ClientMovie-view.fxml";
 
     /**
      * Replaces the content of the current window with a new view.

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -12,6 +14,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Showtime implements Comparable<Showtime> {
 
+    private static final List<Showtime> ALL_SHOWTIMES = new ArrayList<>();
 
     /** Movie being shown. */
     private Movie movie;
@@ -65,6 +68,14 @@ public class Showtime implements Comparable<Showtime> {
         this.availableSeats = totalCapacity;
     }
 
+    /**
+     * Returns the global static list of all created showtimes.
+     * This is used by controllers to access showtime data.
+     * @return List of all Showtime objects.
+     */
+    public static List<Showtime> getAllShowtimes() {
+        return ALL_SHOWTIMES;
+    }
 
     /**
      * Parses a time string into {@link LocalTime}. Accepts 24h (HH:MM or HH:MM:SS) and 12h (h:mm AM/PM).

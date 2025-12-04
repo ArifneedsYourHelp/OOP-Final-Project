@@ -1,6 +1,7 @@
 package Controller;
 
-import Helper.ViewSwitcher; // Assuming ViewSwitcher is available
+
+import Helper.ViewSwitcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,8 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import model.Movie;
+import model.Showtime;
+
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The {@code ClientMovieListController} class is the controller for the client's
@@ -34,8 +38,42 @@ public class ClientMovieListController {
     private Button exitbutton;
 
     /** Defines the FXML file path for the detailed movie view (e.g., /ClientMovie-view.fxml). */
-    public static final String DETAIL_VIEW_FXML = "/ClientMovie-view.fxml"; // Adjust path as needed
+    public static final String DETAIL_VIEW_FXML = ViewSwitcher.DETAIL_VIEW_FXML; // Adjust path as needed
 
+    /**
+     * Sample Movie object used for demonstration purposes.
+     */
+    private Movie sampleMovie;
+
+    /**
+     * Initializes the controller after FXML injection is complete.
+     * Populates the movie list with a sample movie and creates sample showtimes.
+     */
+    @FXML
+    public void initialize() {
+        // Create a single instance of a sample movie
+        // Title: The Code Whisperer, Genre: Tech-Thriller, Duration: 01:45:00, Rating: PG-13
+        sampleMovie = new Movie("The Code Whisperer", "Tech-Thriller", "01:45:00", "PG-13");
+
+        // Add the sample movie to the list view
+        clientMovieList.getItems().add(sampleMovie);
+
+        // --- NOTE: This assumes model.Showtime has the static list and constructor changes from the last step ---
+        // Create sample showtimes for this movie. These are saved globally inside model.Showtime.
+        new Showtime(sampleMovie, java.time.LocalDate.now().plusDays(1), "5:00 PM", "Room 2");
+        new Showtime(sampleMovie, java.time.LocalDate.now().plusDays(2), "8:30 PM", "Room 4");
+
+        // --- MOVIE 2: The Martian Gardener ---
+        // Title: The Martian Gardener, Genre: Sci-Fi/Drama, Duration: 02:10:00, Rating: PG
+        Movie movie2 = new Movie("The Champlains Brains", "Sci-Fi/Drama", "02:10:00", "PG");
+
+        // Add the second sample movie to the list view
+        clientMovieList.getItems().add(movie2);
+
+        // Create sample showtimes for Movie 2.
+        new Showtime(movie2, java.time.LocalDate.now().plusDays(1), "7:30 PM", "Room 1");
+        new Showtime(movie2, java.time.LocalDate.now().plusDays(3), "4:00 PM", "Room 3");
+    }
     /**
      * Handles the action when the "View Movie Details" button is clicked.
      * It checks if a movie is selected, loads the detail view FXML, and switches
@@ -51,6 +89,19 @@ public class ClientMovieListController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(DETAIL_VIEW_FXML));
                 Parent root = loader.load();
 
+                // 2. Get the controller and pass the selected Movie (and its showtimes)
+                ClientMovieController controller = loader.getController();
+
+                /**
+                 * Filters the global list of all showtimes (stored statically in model.Showtime)
+                 * to find only those scheduled for the selected movie.
+                 */
+                List<Showtime> movieShowtimes = Showtime.getAllShowtimes().stream()
+                        .filter(st -> st.getMovie().equals(selectedMovie))
+                        .collect(Collectors.toList());
+
+                // Pass the movie and the filtered showtimes to the detail view
+                controller.setMovie(selectedMovie, movieShowtimes); // CRITICAL STEP: Passing the data
 
                 // 3. Switch the scene
                 Stage stage = (Stage) ClientMovieViewButton.getScene().getWindow();
@@ -59,7 +110,7 @@ public class ClientMovieListController {
 
             } catch (IOException e) {
                 e.printStackTrace();
-                showAlert("Error", "Could not load movie details view.");
+                showAlert("Error", "Could not load movie details view: " + e.getMessage());
             }
         } else {
             showAlert("Selection Required", "Please select a movie.");

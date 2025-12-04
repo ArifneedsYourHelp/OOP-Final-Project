@@ -6,6 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.Movie;
+import model.Showtime;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The {@code ViewSwitcher} class provides a static utility for managing and
@@ -33,6 +38,35 @@ public class ClientMovieController {
     @FXML
     public void initialize() {
         clientMovieBackButton.setOnAction(event -> BackButtonClick());
+    }
+
+    /**
+     * Sets the movie and its associated showtimes to be displayed in the view.
+     * This method is called by the parent controller (`ClientMovieListController`).
+     * @param movie The selected Movie object.
+     * @param showtimes The list of Showtime objects for this movie.
+     */
+    public void setMovie(Movie movie, List<Showtime> showtimes) { // ADDED METHOD
+        // 1. Display Movie Details
+        movieNameLabel.setText("Title: " + movie.getTitle());
+        movieGenreLabel.setText("Genre: " + movie.getGenre());
+        movieDurrationLabel.setText("Duration: " + movie.getDuration());
+        movieRatedLabel.setText("Rating: " + movie.getRating());
+
+        // 2. Display Showtimes
+        if (showtimes != null && !showtimes.isEmpty()) {
+            // Format the showtime data for display in the ListView: "Date at Time in Room X"
+            List<String> showtimeStrings = showtimes.stream()
+                    .map(st -> st.getFormattedDateTime() + " in " + st.getRoom())
+                    .collect(Collectors.toList());
+
+            clientShowTimeList.getItems().setAll(showtimeStrings);
+        } else {
+            clientShowTimeList.getItems().setAll("No showtimes available for this movie.");
+        }
+
+        // Clearing the single 'roomNumberLabel' as it's not applicable here
+        roomNumberLabel.setText(""); // Room number is shown per showtime in the list, so clear the single label
     }
 
     /**
